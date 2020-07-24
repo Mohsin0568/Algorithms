@@ -8,6 +8,9 @@ public class FraudulentActivityNotifications {
 	
 	public static void main(String[] args) {
 		System.out.println(activityNotifications(new int[]{2, 3, 4, 2, 3, 6, 8, 4, 5}, 5));
+//		int[] arr = new int[]{9, 2, 6, 3, 8, 1, 7};
+//		selectionSort(arr, 3);
+//		Arrays.stream(arr).forEach(i -> System.out.print(i + " "));
     }
 	
 	static int activityNotifications(int[] expenditure, int d) {
@@ -31,13 +34,26 @@ public class FraudulentActivityNotifications {
 	
 	static int findMedian(int arr[], int mean, boolean isEven){
 		//sort(arr, 0, arr.length-1);
-		countingSort(arr);
+		//countingSort(arr);
+		selectionSort(arr, mean);
 		if(isEven){
 			return (2*(arr[mean] + arr[mean-1]) / 2);
 		}
 					
 		else
 			return 2 * arr[mean];
+	}
+	
+	static void selectionSort(int arr[], int mean){
+		for(int i = 0; i <= mean; i++){
+			for(int j = arr.length-1; j > 0; j--){
+				if(arr[j] < arr[j-1]){
+					int temp = arr[j];
+					arr[j] = arr[j-1];
+					arr[j-1] = temp;
+				}
+			}
+		}
 	}
 	
 	static void countingSort(int[] arr){
