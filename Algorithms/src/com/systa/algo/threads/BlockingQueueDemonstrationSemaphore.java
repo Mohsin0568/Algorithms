@@ -68,8 +68,8 @@ public class BlockingQueueDemonstrationSemaphore {
 
 class CountingSemaphore{
 	
-	int usedPermits = 0;
-	int maxCount;
+	int usedPermits = 0; // will have count for all used permits
+	int maxCount; // max permits allowed, it will be equal to size of the queue.
 	
 	public CountingSemaphore(int size) {
 		this.maxCount = size;
@@ -117,15 +117,15 @@ class BlockingQueueSemaphore<T>{
 		
 		this.capacity = capacity;
 		array = (T[]) new Object[capacity];
-		semProducer = new CountingSemaphore(capacity, capacity);
-		semConsumer = new CountingSemaphore(capacity, 0);	
+		semProducer = new CountingSemaphore(capacity, capacity); // producer semaphore will have all permits initially since queue is empty.
+		semConsumer = new CountingSemaphore(capacity, 0);	// consumer semaphore will not have any permit initially since queue will be empty and consumer will have no element to read.
 		
 	}
 	
 	public void enqueue(T item) throws InterruptedException {
 		
 		semProducer.acquire();
-		semLock.acquire();		
+		semLock.acquire();	// this lock will make sure tht only thread thread will execute the logic and will release consumer permit.	
 		
 		if(tail == capacity)
 			tail = 0;
@@ -142,7 +142,7 @@ class BlockingQueueSemaphore<T>{
 		T item = null;
 		
 		semConsumer.acquire();
-		semLock.acquire();
+		semLock.acquire(); // this lock will make sure tht only thread thread will execute the logic and will release producer permit.
 		
 		if(head == capacity)
 			head = 0;
