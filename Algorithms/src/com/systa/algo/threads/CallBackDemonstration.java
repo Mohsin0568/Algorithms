@@ -12,7 +12,7 @@ import java.util.concurrent.locks.ReentrantLock;
 /**
  * @author mohsin
  * 
- * Design and implement a thread-safe class that allows registeration of callback methods that are executed after a user specified time interval in seconds has elapsed.
+ * Design and implement a thread-safe class that allows registration of callback methods that are executed after a user specified time interval in seconds has elapsed.
  *
  */
 public class CallBackDemonstration {
