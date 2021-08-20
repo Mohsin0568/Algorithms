@@ -5,6 +5,8 @@ package com.systa.algo.threads;
 
 /**
  * @author mohsin
+ * 
+ * We can have a copy of an instance (or a class) variable for each thread that accesses it by declaring the instance variable ThreadLocal. 
  *
  */
 public class ThreadLocalDemo {
