@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.systa.algo.builder.creational;
+package com.systa.algo.designPatterns.creational;
 
 /**
  * @author mohsin

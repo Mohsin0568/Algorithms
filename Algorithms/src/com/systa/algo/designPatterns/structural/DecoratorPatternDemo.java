@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.systa.algo.builder.structural;
+package com.systa.algo.designPatterns.structural;
 
 /**
  * @author mohsin
