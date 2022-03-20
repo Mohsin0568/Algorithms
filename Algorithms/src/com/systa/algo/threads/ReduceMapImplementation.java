@@ -31,7 +31,7 @@ public class ReduceMapImplementation {
 		
 	}
 	
-	public static void performSumAction(int[] arr) throws InterruptedException, ExecutionException {
+	public static long[] mapTask(int[] arr) throws InterruptedException, ExecutionException {
 		
 		/* create thread pool of 10 threads, each thread will sum 100 elements
 		 * and main thread will combine results of 10 threads to produce final output. 
@@ -56,6 +56,7 @@ public class ReduceMapImplementation {
 		long sum = 0l;
 		
 		int count = 10;
+		long[] mapOutput = new long[10];
 		while(count != 0) { // this while loop will iterate till all tasks have been completed.
 			
 			/*
@@ -65,12 +66,27 @@ public class ReduceMapImplementation {
 			Future<Long> future = service.poll();
 			if(future != null) {
 				Long value = future.get(); // this will return the result from the completed task (callable type).
-				sum += value;
+				mapOutput[count-1] = value;
 				count--; // decrementing count value after reading the completed task, if all tasks are completed then count will be 0 and while loop will be terminated.
 			}
 		}
 		threadPool.shutdown(); // shutting down the thread pool once all the tasks are completed.
+		return mapOutput;
+		
+	}
+	
+	public static void reduceTask(long[] arr) {
+		long sum = 0;
+		for(long x : arr) {
+			sum += x;
+		}
+		
 		System.out.println("Value is " + sum);
+	}
+	
+	public static void performSumAction(int[] arr) throws InterruptedException, ExecutionException {
+		long[] mapOutput = mapTask(arr);
+		reduceTask(mapOutput);
 	}
 	
 	public static Callable<Long> getCallableObject(int[] arr, int start, int end){
